@@ -28,4 +28,8 @@ bees_label_dir = 'bees'
 ants_dataset = ReadData(root_dir, ants_label_dir)
 bees_dataset = ReadData(root_dir, bees_label_dir)
 
+<<<<<<< HEAD
 train_dataset = ants_dataset + bees_dataset
+=======
+train_dataset = ants_dataset + bees_dataset
+>>>>>>> origin/main
