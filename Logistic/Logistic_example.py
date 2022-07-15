@@ -25,20 +25,20 @@ sigma2 = torch.eye(2) * 2
 
 m1 = MultivariateNormal(mu1, sigma1)
 m2 = MultivariateNormal(mu2, sigma2)
-x1 = m1.sample((100,))
+x1 = m1.sample((100,))  # 可以理解成从m1中选了（100*1）个数据出来
 x2 = m2.sample((100,))
 
 y = torch.zeros((200, 1))
 y[100:] = 1
 
 x = torch.cat([x1, x2], dim=0)
-idx = np.random.permutation(len(x))
+idx = np.random.permutation(len(x))  # 打乱数据
 x = x[idx]
 y = y[idx]
 
 lr_module = LogisticRegression()
-loss = nn.BCELoss()
-optimizer = optim.SGD(lr_module.parameters(), 0.03)
+loss = nn.BCELoss()  # 二值交叉熵损失函数
+optimizer = optim.SGD(lr_module.parameters(), 0.03)  # 梯度下降法
 scores = lr_module(x)
 
 batch_size = 10
@@ -58,7 +58,7 @@ b = lr_module.linear.bias[0]
 
 
 def draw_decision_boundary(w0, b0, x0):
-    x11 = (-b0-w0[0]*x0)/w0[1]
+    x11 = (-b0-w0[0]*x0)/w0[1]  # 在边界，y=0，故把矩阵展开后有该式
     plt.plot(x0.detach().numpy(), x11.detach().numpy(), 'r')
     plt.scatter(x1.numpy()[:, 0], x1.numpy()[:, 1])
     plt.scatter(x2.numpy()[:, 0], x2.numpy()[:, 1])
